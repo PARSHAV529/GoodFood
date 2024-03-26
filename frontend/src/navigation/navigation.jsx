@@ -19,9 +19,7 @@ import { CategoriesAdmin } from "../adminPanel/CategoriesAdmin.jsx";
 import { MenuItemsAdmin } from "../adminPanel/MenuItemsAdmin.jsx";
 import { OrdersAdmin } from "../adminPanel/OrdersAdmin.jsx";
 import Example from "../components/Header3.jsx";
-import Footer from "../components/footer.jsx";
 import  UserProfile  from "../pages/UserProfile.jsx";
-import { browserSessionPersistence, onAuthStateChanged, setPersistence } from "firebase/auth";
 
 
 
