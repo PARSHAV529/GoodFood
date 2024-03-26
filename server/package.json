@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "vercel-build": "echo hello"
+    "vercel-build": "npm install --production && npm prune --production && echo 'Vercel build completed successfully.'"
   },
   "keywords": [],
   "author": "",
