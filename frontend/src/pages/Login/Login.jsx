@@ -18,7 +18,7 @@ role: role,
 
 try {
 
-const res =await fetch(`http://localhost:8080/api/add-user`,{
+const res =await fetch(`https://goodfood-909g.onrender.com/api/add-user`,{
   method: 'POST',
   headers : { 'Content-Type': 'application/json'},
   body:JSON.stringify(data)

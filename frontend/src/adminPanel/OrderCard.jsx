@@ -4,7 +4,7 @@ import axios from 'axios';
 const send = async (recipientEmail) => {
 
     try {
-        const res= await axios.post('http://localhost:8080/api/send-email', { recipientEmail });
+        const res= await axios.post('https://goodfood-909g.onrender.com/api/send-email', { recipientEmail });
         console.log(res.data)
         alert('Email sent successfully!');
     } catch (error) {
@@ -15,7 +15,7 @@ const send = async (recipientEmail) => {
 
 const deleteCartItem = async (itemId) => {
     try {
-        const response = await axios.delete(`http://localhost:8080/api/delete-cart-item/${itemId}`);
+        const response = await axios.delete(`https://goodfood-909g.onrender.com/delete-cart-item/${itemId}`);
         console.log('Cart item deleted:', response.data);
         // Optionally, update the cart state or UI after deletion
     } catch (error) {

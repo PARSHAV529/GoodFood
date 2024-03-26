@@ -7,7 +7,7 @@ export const fetchUserData = createAsyncThunk('user/fetchUserData', async ({ ema
   console.log(email);
   try {
     // Make a request to fetch user data from the database based on the email
-    const response = await fetch(`http://localhost:8080/api/users/:${email}`); // Use the correct API endpoint
+    const response = await fetch(`https://goodfood-909g.onrender.com/api/users/:${email}`); // Use the correct API endpoint
     console.log(response)
     const userData = await response.json();
     return userData;

@@ -20,7 +20,7 @@ const addToDatabase = async (newcategory) => {
 
   try {
 
-    const res = await fetch(`http://localhost:8080/api/add-categories`, {
+    const res = await fetch(`https://goodfood-909g.onrender.com/api/add-categories`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)

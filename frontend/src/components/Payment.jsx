@@ -21,7 +21,7 @@ const send = async (userInfo) => {
    
   
       try {
-        const res = await axios.post('http://localhost:8080/api/send-email', { recipientEmail ,text,subject });
+        const res = await axios.post('https://goodfood-909g.onrender.com/api/send-email', { recipientEmail ,text,subject });
         console.log(res.data)
         // alert('Email sent successfully!');
         // setReload("email");
@@ -39,7 +39,7 @@ console.log(status)
 console.log(ProductPrice)
   try {
     // Send cart item data to the server
-    const response = await axios.post('http://localhost:8080/api/add-cart-item', {
+    const response = await axios.post('https://goodfood-909g.onrender.com/api/add-cart-item', {
       productName,
       quantity,
       ProductPrice,

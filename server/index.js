@@ -13,7 +13,7 @@ const userRouter = require('./routes/userRoutes')
 const categoriesRoutes = require('./routes/categoriesRoutes')
 
 var corsOptions = {
-  origin:["http://localhost:5173","https://food-ordering-parshav-frontend.vercel.app"]
+  origin:["http://localhost:5173","https://good-food-gamma.vercel.app"]
 };
 
 app.use(express.json());

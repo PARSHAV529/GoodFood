@@ -26,7 +26,7 @@ export const { getProducts } = productsSlice.actions
 export default productsSlice.reducer
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-    const response = await fetch('http://localhost:8080/api/products-by-categories')
+    const response = await fetch('https://goodfood-909g.onrender.com/api/products-by-categories')
     const data = await response.json()
     return data
 })

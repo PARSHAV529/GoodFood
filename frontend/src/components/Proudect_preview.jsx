@@ -44,7 +44,7 @@ export const ProductsPreview = () => {
     
    
     useEffect(() => {
-       fetch('http://localhost:8080/api/products')
+       fetch('https://goodfood-909g.onrender.com/api/products')
             .then(response => response.json())
             .then(data => {setProducts(data?.data)})
             .catch(e => console.log(e))

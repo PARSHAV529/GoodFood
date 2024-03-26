@@ -9,7 +9,7 @@ export default function PositionedMenuAdmin({ onSelect }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/categories');
+        const response = await axios.get('https://goodfood-909g.onrender.com/api/categories');
         setCategory(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);

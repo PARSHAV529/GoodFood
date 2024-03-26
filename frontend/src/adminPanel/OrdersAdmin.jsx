@@ -46,7 +46,7 @@ let subject= 'Your Order is Redy !!'
     
 
     try {
-      const res = await axios.post('http://localhost:8080/api/send-email', { recipientEmail ,text,subject });
+      const res = await axios.post('https://goodfood-909g.onrender.com/api/send-email', { recipientEmail ,text,subject });
       console.log(res.data)
       alert('Email sent successfully!');
       setReload("email");
