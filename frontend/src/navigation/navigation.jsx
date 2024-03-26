@@ -64,7 +64,7 @@ const Navigation = () => {
 
   return (
     <BrowserRouter >
-     {userRole==='user' || !userRole  ? <Example cartCount={productsInCart ? productsInCart.length : 0} /> : null}
+      <Example cartCount={productsInCart ? productsInCart.length : 0} /> 
 
       <Routes>
         <Route path="/logout" element={<Logout />} />

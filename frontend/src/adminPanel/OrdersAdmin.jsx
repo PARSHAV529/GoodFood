@@ -63,7 +63,7 @@ let subject= 'Your Order is Redy !!'
         status: status
       }
   
-      const response = await axios.put(`http://localhost:8080/api/update-cart-item/${item._id}`, formData);
+      const response = await axios.put(`https://goodfood-909g.onrender.com/api/update-cart-item/${item._id}`, formData);
       console.log('Cart item updated:', response.data);
   
       setReload("done");
@@ -76,7 +76,7 @@ let subject= 'Your Order is Redy !!'
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/cart-items');
+        const response = await axios.get('https://goodfood-909g.onrender.com/api/cart-items');
         const sortedCartItems = response.data.sort((a, b) => {
           if (a.status === "Received" && b.status !== "Received") return 1;
           if (a.status !== "Received" && b.status === "Received") return -1;

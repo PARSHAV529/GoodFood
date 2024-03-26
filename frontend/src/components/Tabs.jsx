@@ -7,7 +7,7 @@ export const Tabs = ({ list, activeTab, onTabSwitch, handleInputChange, searchIt
 
 
     return (
-        <div className="sticky flex mt-10  z-1900 text-[#a5a4a9]">
+        <div className="sticky flex   z-1900 text-[#a5a4a9]">
             <div className="container mx-auto flex align-center py-2 border-b-gray-400 border-b-1">
                 {list.map((item, index) => {
                     return (

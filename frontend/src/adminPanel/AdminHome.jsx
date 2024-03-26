@@ -17,7 +17,7 @@ const AdminHome = ({tab,}) => {
 
     return (
         <>
-            <div className='flex flex-col mb-10 h-10 w-screen items-center justify-center'>
+            <div className='flex flex-col mt-20 mb-10 h-10 w-screen items-center justify-center'>
                 {products.products && <Tabs list={list} activeTab={activeTab} onTabSwitch={onTabSwitch} />}
             </div>
         </>

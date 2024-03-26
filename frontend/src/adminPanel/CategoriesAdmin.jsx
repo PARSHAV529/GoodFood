@@ -37,7 +37,7 @@ const addToDatabase = async (newcategory) => {
 
 const deleteCategory = async (name) => {
   try {
-    await axios.delete(`http://localhost:8080/api/delete-categories/${name}`);
+    await axios.delete(`https://goodfood-909g.onrender.com/api/delete-categories/${name}`);
     // setDeletedCategory(name); 
   } catch (error) {
     console.error('Error deleting category:', error);
@@ -47,7 +47,7 @@ const deleteCategory = async (name) => {
 const editCategoryName = async (id, newName) => {
   try {
     
-    await axios.put(`http://localhost:8080/api/edit-categories/${id}`, { name: newName });
+    await axios.put(`https://goodfood-909g.onrender.com/api/edit-categories/${id}`, { name: newName });
     setEditedCategory(id); // Trigger useEffect to refetch categories
   } catch (error) {
     console.error('Error updating category name:', error);
@@ -66,7 +66,7 @@ export const CategoriesAdmin = () => {
   useEffect(() => {
      const  fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/categories'); // Assuming your backend server is running on the same host
+        const response = await axios.get('https://goodfood-909g.onrender.com/api/categories'); // Assuming your backend server is running on the same host
         setTodos(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
