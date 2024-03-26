@@ -20,6 +20,7 @@ import { MenuItemsAdmin } from "../adminPanel/MenuItemsAdmin.jsx";
 import { OrdersAdmin } from "../adminPanel/OrdersAdmin.jsx";
 import Example from "../components/Header3.jsx";
 import  UserProfile  from "../pages/UserProfile.jsx";
+import { NotFound } from "../pages/NotFound.jsx";
 
 
 
@@ -79,6 +80,7 @@ const Navigation = () => {
         <Route path="/admin/orders" element={<ProtectedRoute component={OrdersAdmin} userRole={userRole} allowedRoles={['provider']} />} />
         <Route path="/admin/categories" element={<ProtectedRoute component={CategoriesAdmin} userRole={userRole} allowedRoles={['provider']} />} />
         <Route path="/admin/menuitems" element={<ProtectedRoute component={MenuItemsAdmin} userRole={userRole} allowedRoles={['provider']} />} />
+        <Route path="*" element={ <NotFound/>} />
 
         {/* <Route path="/payment-success" element={<PaymentSuccess />} /> */}
 
