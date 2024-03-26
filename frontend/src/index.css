@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* HTML: <div class="loader"></div> */
+  body{
+    background-color: #fff;
+    margin: 0;
+  padding: 0;
+  min-height: 100vh !important;
+ 
+  }
+  #root {
+    flex: 1;
+  }
+  .navbar{
+    /* From https://css.glass */
+    /* From https://css.glass */
+background: rgba(0, 0, 0, 0.42);
+/* border-radius: 16px; */
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5.4px);
+-webkit-backdrop-filter: blur(5.4px);
+border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+.loader {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 8px solid #d1914b;
+  box-sizing: border-box;
+  --c:no-repeat radial-gradient(farthest-side, #d64123 94%,#0000);
+  --b:no-repeat radial-gradient(farthest-side, #000 94%,#0000);
+  background:
+    var(--c) 11px 15px,
+    var(--b) 6px 15px,    
+    var(--c) 35px 23px,
+    var(--b) 29px 15px,    
+    var(--c) 11px 46px,
+    var(--b) 11px 34px,    
+    var(--c) 36px 0px,
+    var(--b) 50px 31px,
+    var(--c) 47px 43px,
+    var(--b) 31px 48px,    
+    #f6d353; 
+  background-size: 15px 15px,6px 6px;
+  animation: l4 3s infinite;
+}
+dialog{
+  text-align:center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+z-index: -50;
+ 
+  
+
+}
+dialog[open]{
+  animation: slide-in-from-top 0.35s ease-out;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.9);
+}
+/* Add this CSS to your stylesheet */
+
+
+
+@media screen and (max-width: 600px) {
+  dialog {
+    width: 90%; /* Adjust width for smaller screens */
+    max-width: none; /* Remove max-width */
+  }
+}
+
+
+@keyframes l4 {
+  0%     {-webkit-mask:conic-gradient(#0000 0     ,#000 0)}
+  16.67% {-webkit-mask:conic-gradient(#0000 60deg ,#000 0)}
+  33.33% {-webkit-mask:conic-gradient(#0000 120deg,#000 0)}
+  50%    {-webkit-mask:conic-gradient(#0000 180deg,#000 0)}
+  66.67% {-webkit-mask:conic-gradient(#0000 240deg,#000 0)}
+  83.33% {-webkit-mask:conic-gradient(#0000 300deg,#000 0)}
+  100%   {-webkit-mask:conic-gradient(#0000 360deg,#000 0)}
+}
+
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+  html.dark {
+    @apply text-neutral-50;
+    @apply bg-neutral-800;
+  }
+  @font-face {
+    font-family: 'ClashDisplay-Regular';
+    src: url('./assets/fonts/ClashDisplay-Regular.woff2').format('woff2');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'ClashDisplay-Medium';
+    src: url('./assets/fonts/ClashDisplay-Medium.woff2').format('woff2');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'ClashDisplay-Bold';
+    src: url('./assets/fonts/ClashDisplay-Bold.woff2').format('woff2');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+}
+

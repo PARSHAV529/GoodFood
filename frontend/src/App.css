@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #F4EEC7;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+  overflow-x: hidden;
+  /* background-image: url("https://img.freepik.com/free-vector/sketches-arabic-food-pattern_23-2147543047.jpg?t=st=1709070505~exp=1709074105~hmac=47af9b7c89ea62c2768a2239a17dfa4ccdbb287c075fc116dcaee806328d13aa&w=740");
+  backdrop-filter: blur(2px);
+-webkit-backdrop-filter: blur(4.7px); */
+}
+.container-with-hidden-scrollbar {
+  /* Other styles for your container */
+  max-height: 100vh; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.container-with-hidden-scrollbar::-webkit-scrollbar {
+  width: 0;
+  display: none; /* Optional: hide scrollbar in Firefox */
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+}

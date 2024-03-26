@@ -1,0 +1,88 @@
+*{
+    font-family: 'Roboto', sans-serif;
+    
+  }
+  .food-container {
+    margin: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    
+/*    */
+ 
+
+   /* text-align: center; */
+    /* position:sticky; */
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 0 10px rgb(255, 255, 255,0.5);
+  
+    padding: 0.1rem;
+    /* From https://css.glass */
+/* From https://css.glass */
+background: rgba(222, 192, 192, 0.24);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3px);
+-webkit-backdrop-filter: blur(3px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .addtolike{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    /* margin-top: 1rem; */
+  }
+  
+  .food-cart-btn{
+    border-radius: 0.5rem;
+  border: none;
+  height: 1.5rem; 
+  width: 1.5rem;
+  font-size: 1.5rem;
+  color: black;
+  /* background-color: #7E30E1; */
+  
+  }
+  .addtocatbtn{
+    /* border: none; */
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    align-self: self-end;
+  }
+  
+  .food-image {
+    width: 100%;
+    
+    border-radius: 50%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 1);
+  }
+  .food-image-admin {
+    width: 50%;
+    
+    border-radius: 50%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 1);
+  }
+  .quantity-display{
+    font-size: 1.5rem;
+  }
+  
+  .food-details {
+    padding: 15px;
+  }
+  
+  .food-name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .food-price {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+  }
