@@ -16,7 +16,7 @@ router.get('/products', async (req, res) => {
 
 router.get('/products-by-categories', async(req, res) => {
     try {
-        const products = await ProductSchema.aggregate([
+        const products = await Product.aggregate([
             { $match: {}},
             { $group: {
                 _id: '$category',
