@@ -1,7 +1,8 @@
 import AddIcon from '@mui/icons-material/Add';
 import '../components/product.css'
+import LongMenu from './LongMenu';
 
-export const ProductPreviewCardAdmin = ({ product, onclick }) => {
+export const ProductPreviewCardAdmin = ({ product, onclick ,onDelete,updateForm}) => {
 
 
 
@@ -21,7 +22,11 @@ export const ProductPreviewCardAdmin = ({ product, onclick }) => {
             {product && <img src={product.imageUrl} className='food-image-admin  h-[10rem]' />}
 
             <div className="food-details flex flex-col gap-3 overflow-auto">
-                <div className="food-name flex !text-sm">  {product && `Name: ${(product.name).charAt(0).toUpperCase() + (product.name).slice(1)}`}</div>
+                <div className='flex h-full items-center justify-center gap-7'>
+                <div className="food-name flex !text-sm">  {product && ` ${(product.name).charAt(0).toUpperCase() + (product.name).slice(1)}`}</div>
+
+                <LongMenu product={product && product} updateForm={updateForm} onDelete={onDelete} name={product && product.name} />
+                </div>
 
                 <div className="food-price flex"> {product && `Price: ₹${product.price}`}</div>
                 <div className="cart flex gap-1  text-sm">

@@ -21,6 +21,7 @@ router.post('/add-categories', async (req, res) => {
 
   router.delete('/delete-categories/:name', async (req, res) => {
     const categoryName = req.params.name;
+    
 
     const cleanedCategory = categoryName.replace(/^:/, '');
   

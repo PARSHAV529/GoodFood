@@ -2,7 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 
-const Product = require('../models/productModel')
+const {Product} = require('../models/productModel')
 const User = require('../models/userTypeModel')
 
 router.get('/products', async (req, res) => {
@@ -16,7 +16,7 @@ router.get('/products', async (req, res) => {
 
 router.get('/products-by-categories', async(req, res) => {
     try {
-        const products = await Product.aggregate([
+        const products = await ProductSchema.aggregate([
             { $match: {}},
             { $group: {
                 _id: '$category',

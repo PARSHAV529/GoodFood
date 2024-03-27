@@ -14,9 +14,12 @@ const ProductSchema = new Schema(
     }
 )
 
-module.exports = mongoose.model('Product', ProductSchema)
+// module.exports = mongoose.model('Product', ProductSchema)
 
-//  = {
-//     Product,        // Exporting the Category model
-//     ProductSchema   // Exporting the category schema
-// };
+const Product = mongoose.model('Product', ProductSchema)
+
+module.exports = {
+    Product,        // Exporting the Category model
+    ProductSchema   // Exporting the category schema
+};
+
