@@ -32,12 +32,12 @@ const Example = (props) => {
                         <a href="/" className="text-white font-semibold text-xl"><img src={logo} className='h-8 scale-150 ' alt="Logo" /></a>
                     </div>
                     <div className="flex items-center gap-3 md:gap-4 lg:gap-5">
-                        { userRole==='user' || !userRole &&<Link to="/cart" className="relative ">
+                        { userRole==='user' || !userRole ?<Link to="/cart" className="relative ">
                             <div className='text-white scale-110'>            
                                 <ShoppingCartIcon />
                             </div>
                             { props.cartCount > 0 && <div className="rounded-full bg-yellow-400 text-sm text-white inline-flex justify-center items-center w-4 h-4 absolute -top-1.5 -right-1">{props.cartCount}</div>}
-                        </Link>}
+                        </Link>: null}
                         {userEmail ? (
                             <Link to="/logout" className=""><div className=' text-white  scale-110'><LogoutIcon /> </div></Link>
                         ) : (
