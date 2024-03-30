@@ -66,7 +66,7 @@ const Menu = ()=>{
       }
 
     return(
-        email ?
+        email && products ?
         
         <div className="bg-[#fff] mt-10 h-screen">
            {
