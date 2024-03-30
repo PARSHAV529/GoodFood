@@ -67,13 +67,14 @@ const Navigation = () => {
       <Example cartCount={productsInCart ? productsInCart.length : 0} /> 
 
       <Routes>
+      <Route path="/" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
+      <Route path="/:providerId" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
+
         <Route path="/logout" element={<Logout />} />
-        {/* <Route path="/" element={<Home name={userName} />} /> */}
-        <Route path="/:providerId" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
-        <Route path="/" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
+       
         <Route path="/login" element={<Login googleRole='user' />} />
         <Route path="/user/register" element={<Signup role='user' />} />
-        {/* <Route path="/provider/login/" element={<Login googleRole='provider' />} /> */}
+      
         <Route path="/provider/register/" element={<Signup role='provider' />} />
         <Route path="/menu" element={<ProtectedRoute component={Menu} userRole={userRole} allowedRoles={['user']} />} />
         <Route path="/cart" element={<ProtectedRoute component={Cart} userRole={userRole} allowedRoles={['user']} />} />
