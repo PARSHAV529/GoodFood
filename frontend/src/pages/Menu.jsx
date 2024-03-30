@@ -66,7 +66,7 @@ const Menu = ()=>{
       }
 
     return(
-        email && products ?
+        email && products.length >0 ?
         
         <div className="bg-[#fff] mt-10 h-screen">
            {
