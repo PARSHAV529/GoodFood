@@ -1,10 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { user } from "../userInfo/userSlice";
+import axios from "axios";
 
 const initialState = {
     products: [],
     error: null,
     status: 'idle',
 }
+
+
 
 export const productsSlice = createSlice({
     name: 'products',
@@ -25,9 +30,13 @@ export const { getProducts } = productsSlice.actions
 
 export default productsSlice.reducer
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-    const response = await fetch('https://goodfood-909g.onrender.com/api/products-by-categories')
-    const data = await response.json()
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async (email) => {
+    console.log(email)
+    const response = await axios.get(`http://localhost:8080/api/products-by-categories?provideremail=${email}`)
+    console.log(response)
+    const data =  response.data
+    
+   
     return data
 })
 

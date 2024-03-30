@@ -69,6 +69,7 @@ const Navigation = () => {
       <Routes>
         <Route path="/logout" element={<Logout />} />
         {/* <Route path="/" element={<Home name={userName} />} /> */}
+        <Route path="/:providerId" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
         <Route path="/" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
         <Route path="/login" element={<Login googleRole='user' />} />
         <Route path="/user/register" element={<Signup role='user' />} />

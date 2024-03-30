@@ -6,11 +6,13 @@ const {categorySchema} = require('./categoryModel');
 
 const ProductSchema = new Schema(
     {
+       
         name: { type: String, required: true },
         adjective: { type: String, required: true },
         price: { type: Number, required: true },
         category: { type:categorySchema, ref: 'Category', required: true },
-        imageUrl :{ type: String ,required: true}
+        imageUrl :{ type: String ,required: true},
+        provideremail : {type: String, required: true }
     }
 )
 

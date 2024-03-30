@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 
 const cartItemSchema = new mongoose.Schema({
+
+  provideremail : {type: String, required: true },
   productName: { type: String, required: true },
   quantity: { type: Number, required: true },
   ProductPrice: { type: Number, required: true},

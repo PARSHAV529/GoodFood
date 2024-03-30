@@ -20,10 +20,10 @@ const ProtectedRoute = ({ name ,component: Component, userRole }) => {
         case 'ordersadmin':
           navigate('/admin/orders');
           break;
-        case 'categoriesadmin':
+        case 'categoriesadmin'://CategoriesAdmin
           navigate('/admin/categories');
           break;
-        case 'menuitemsadmin':
+        case 'menuitemsadmin'://MenuItemsAdmin
           navigate('/admin/menuitems');
           break;
         default:

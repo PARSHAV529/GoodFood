@@ -5,9 +5,14 @@ import { fetchProducts, selectAllProducts } from '../store/menu/productsSlice';
 import { ProductPreviewCardAdmin } from './ProductPreviewCardAdmin';
 import AddItem from './AdditemForm';
 import UpdateItem from './UpdateItemForm';
+import { user } from '../store/userInfo/userSlice';
 
 export const MenuItemsAdmin = () => {
   const dispatch = useDispatch();
+  let userinfo = useSelector(user)
+  
+  let email = userinfo.email
+    
   const openForm = useRef();
   const openupdateForm = useRef();
   const [form, setForm] = useState("");
@@ -23,7 +28,7 @@ export const MenuItemsAdmin = () => {
   const products = useSelector(selectAllProducts);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(userinfo.email));
     setForm("finished");
     setdeletetrigger("finished");
   }, [form, dispatch, deletetrigger]);
@@ -44,7 +49,7 @@ export const MenuItemsAdmin = () => {
       <AdminHome tab='MenuItems' />
 
       <div className=''>
-        <AddItem ref={openForm} onclick={setForm} />
+        <AddItem ref={openForm} onclick={setForm} email={email} />
       </div>
 
       <div className=''>

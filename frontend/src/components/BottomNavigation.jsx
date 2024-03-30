@@ -8,14 +8,17 @@ import Paper from '@mui/material/Paper';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import { useSelector } from 'react-redux';
+import { user } from '../store/userInfo/userSlice';
 
 export default function FixedBottomNavigation() {
   const navigate = useNavigate();
+  let userinfo = useSelector(user)
 
   const handleNavigation = (event, newValue) => {
     switch (newValue) {
       case 'Home':
-        navigate('/');
+        navigate(`/${userinfo && userinfo.providerid}`);
         break;
       case 'About':
         navigate('#about');

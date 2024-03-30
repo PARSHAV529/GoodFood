@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {Product} = require('../models/productModel'); 
+const { Product } = require('../models/productModel'); 
 const multer = require('multer');
 const uploads = require('../utils/generatecloudinariurl');
 const cloudinary = require('cloudinary').v2;
@@ -21,9 +21,9 @@ const upload = multer({ storage: storage });
 router.post('/add-menuItems', upload.single('imageUrl'), async (req, res) => {
   try {
     // Extract menu item data from request body
-    const { name, adjective, price, category } = req.body;
+    const { name, adjective, price, category, provideremail } = req.body;
     const cat = JSON.parse(category);
-    let image = "";
+    let image = ""
 
     // Upload image to Cloudinary if provided
     if (req.file) {
@@ -38,7 +38,8 @@ router.post('/add-menuItems', upload.single('imageUrl'), async (req, res) => {
       adjective,
       price,
       category: cat,
-      imageUrl: image
+      imageUrl: image,
+      provideremail  // Include provideremail in the new menu item
     });
 
     // Save the new menu item to the database
@@ -53,7 +54,7 @@ router.post('/add-menuItems', upload.single('imageUrl'), async (req, res) => {
   }
 });
 
-// Route to delete a menu item by name
+// Route to delete a menu item by provideremail and name
 router.delete('/delete-menuItem/:name', async (req, res) => {
   let name = req.params.name;
   console.log(name)
@@ -77,7 +78,7 @@ router.delete('/delete-menuItem/:name', async (req, res) => {
   }
 });
 
-// Route to update a menu item by name
+// Route to update a menu item by provideremail and name
 router.put('/update-menuItem/:name', async (req, res) => {
   try {
     // Extract updated menu item data from request body

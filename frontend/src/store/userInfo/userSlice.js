@@ -20,6 +20,7 @@ export const fetchUserData = createAsyncThunk('user/fetchUserData', async ({ ema
 const initialState = {
   email: '',
   role: '',
+  providerid:'',
   status: 'idle',
   error: null,
 };
@@ -28,9 +29,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setUserProviderId: (state, action) => {
+      state.providerid = action.payload;
+    },
     clearUser: (state) => {
       state.email = '';
       state.role = '';
+      state.providerid='';
       state.status = 'idle';
       state.error = null;
     },
@@ -63,6 +68,6 @@ export const loginUser = (email) => async (dispatch) => {
     // Handle error or dispatch error action
   }
 };
-export const { clearUser } = userSlice.actions;
+export const { clearUser,setUserProviderId } = userSlice.actions;
 export const user = state => state.user
 

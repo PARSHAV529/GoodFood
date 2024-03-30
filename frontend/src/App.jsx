@@ -4,7 +4,7 @@ import './App.css'
 
 
 function App() {
-  sessionStorage.setItem('role', 'undifended')
+  
 
   return (
     

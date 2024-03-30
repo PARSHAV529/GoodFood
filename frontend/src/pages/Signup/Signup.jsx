@@ -22,7 +22,28 @@ function Signup({ role }) {
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   const addToDatabase = async (email, role) => {
-    // Your logic to add user to the database after signup
+  
+    // Create a new user instance
+  let data = {
+  email: email,
+  role: role,
+  }
+  
+  try {
+  
+  const res =await fetch(`https://goodfood-909g.onrender.com/api/add-user`,{
+    method: 'POST',
+    headers : { 'Content-Type': 'application/json'},
+    body:JSON.stringify(data)
+  
+  })
+  
+  } catch (error) {
+  console.error(error)
+  }
+  
+  
+    
   };
 
   useEffect(() => {
@@ -46,11 +67,14 @@ function Signup({ role }) {
       .then(async (res) => {
         setSubmitButtonDisabled(false);
 
+
+        addToDatabase(values.email, role);
+
         // Dispatch action to fetch user data
         dispatch(fetchUserData({ email: values.email }));
 
         // Proceed with navigation logic based on user role
-        addToDatabase(values.email, role);
+     
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);

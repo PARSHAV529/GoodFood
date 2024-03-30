@@ -6,6 +6,8 @@ import { Tabs } from "../components/Tabs";
 import { addToCart } from "../store/cart/cartSlice";
 import { ProductPreviewCard } from "../components/ProductPreviewCard";
 import toast from "react-hot-toast";
+import { user } from "../store/userInfo/userSlice";
+import { FallbackMenu } from "../components/FallbackMenu";
 
 
 
@@ -13,16 +15,26 @@ import toast from "react-hot-toast";
 const Menu = ()=>{
 
     const dispatch = useDispatch();
+    let userinfo = useSelector(user)
+    let email = userinfo.providerid
+    console.log(userinfo.providerid)
+
+    
+    useEffect(() => {
+        dispatch(fetchProducts(email))
+        console.log(userinfo.providerid)        
+    }, [])
+
+
     const products = useSelector(selectAllProducts);
-    const [searchItem, setSearchItem] = useState('')
+    console.log(products)
     const [filterdProducts,setFilterdProducts]= useState(products);
+    
+    const [searchItem, setSearchItem] = useState('')
     // console.log(filterdProducts)
     // console.log(JSON.stringify(products))
     const [activeTab, setActiveTab] = useState('');
     const [activeTabIndex, setActiveTabIndex] = useState(0);
-    useEffect(() => {
-        dispatch(fetchProducts())
-    }, [])
 
     const onAddProduct = (product) => {
         
@@ -56,6 +68,7 @@ const Menu = ()=>{
       }
 
     return(
+        email ?
         
         <div className="bg-[#fff] mt-10 h-screen">
            {
@@ -84,7 +97,7 @@ const Menu = ()=>{
                 </div>
             </div>
            }
-        </div>
+        </div>:<FallbackMenu/>
     )
 }
 
