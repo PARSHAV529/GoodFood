@@ -64,9 +64,12 @@ const Menu = ()=>{
             }
         }
       }
+      console.log(email)
+      console.log(products.length )
 
     return(
-        email || products.length > 0 ?
+        
+        email && products &&  products.products.length > 0 ?
         
         <div className="bg-[#fff] mt-10 h-screen">
            {
