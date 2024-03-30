@@ -32,10 +32,10 @@ export default productsSlice.reducer
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async (email) => {
     console.log(email)
-    const response = await axios.get(`http://localhost:8080/api/products-by-categories?provideremail=${email}`)
+    const response = await axios.get(`https://goodfood-909g.onrender.com/api/products-by-categories?provideremail=${email}`)
     console.log(response)
     const data =  response.data
-    
+
    
     return data
 })

@@ -17,7 +17,7 @@ const addToDatabase = async (formdata) => {
 
    
     // console.log(formdata.name);
-    const res= await axios.post('http://localhost:8080/api/add-menuItems',formdata)
+    const res= await axios.post('https://goodfood-909g.onrender.com/api/add-menuItems',formdata)
         // console.log(res.data)
 
   } catch (error) {

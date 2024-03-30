@@ -41,7 +41,7 @@ const UpdateItem = forwardRef(function UpdateItem({ onclick }, ref) {
   
 const handleUpdate = async (formdata) => {
     try {
-      const response = await axios.put(`http://localhost:8080/api/update-menuItem/${nameToUpdate}`, {
+      const response = await axios.put(`https://goodfood-909g.onrender.com/api/update-menuItem/${nameToUpdate}`, {
         name: nameRef.current.value,
         adjective: adjectiveRef.current.value,
         price: priceRef.current.value,
