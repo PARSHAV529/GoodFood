@@ -6,6 +6,7 @@ import { setUserProviderId } from "../store/userInfo/userSlice"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
+import { fetchProducts } from "../store/menu/productsSlice"
 
 const Home = ({name}) => {
   const dispatch = useDispatch();
@@ -16,6 +17,14 @@ const Home = ({name}) => {
    
     dispatch(setUserProviderId(providerId));
   }, [dispatch]);
+
+  useEffect(() => {
+    if(providerId){
+        dispatch(fetchProducts(providerId))
+        console.log(providerId)   
+    }
+         
+}, [])
 
     return (<div className="bg-[#fff]">
      <div className="">

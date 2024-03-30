@@ -68,7 +68,7 @@ const Navigation = () => {
 
       <Routes>
       <Route path="/" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
-      <Route path="/:providerId" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
+      <Route path="/provider/:providerId" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
 
         <Route path="/logout" element={<Logout />} />
        

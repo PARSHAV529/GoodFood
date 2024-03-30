@@ -15,18 +15,16 @@ import { FallbackMenu } from "../components/FallbackMenu";
 const Menu = ()=>{
 
     const dispatch = useDispatch();
+
     const userinfo = useSelector(user)
     const email = userinfo.providerid
     console.log(userinfo.providerid)
 
     
-    useEffect(() => {
-        dispatch(fetchProducts(email))
-        console.log(userinfo.providerid)        
-    }, [userinfo,dispatch])
-
+   
 
     const products = useSelector(selectAllProducts);
+ 
     console.log(products)
     const [filterdProducts,setFilterdProducts]= useState(products);
     
