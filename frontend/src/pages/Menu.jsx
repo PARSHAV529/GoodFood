@@ -1,104 +1,74 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchProducts,selectAllProducts} from '../store/menu/productsSlice'
-import ProductDetailCard from '../components/ProductDetailCard'
-import { Tabs } from "../components/Tabs";
+import { fetchProducts, selectAllProducts } from '../store/menu/productsSlice';
 import { addToCart } from "../store/cart/cartSlice";
+import { FallbackMenu } from "../components/FallbackMenu";
+import { Tabs } from "../components/Tabs";
 import { ProductPreviewCard } from "../components/ProductPreviewCard";
 import toast from "react-hot-toast";
 import { user } from "../store/userInfo/userSlice";
-import { FallbackMenu } from "../components/FallbackMenu";
 
-
-
-
-const Menu = ()=>{
-
+const Menu = () => {
     const dispatch = useDispatch();
-    let userinfo = useSelector(user)
-    let email = userinfo.providerid
-    console.log(userinfo.providerid)
+    const userinfo = useSelector(user);
+    const email = userinfo.providerid;
 
-    
     useEffect(() => {
-        dispatch(fetchProducts(email))
-        console.log(userinfo.providerid)        
-    }, [userinfo])
-
+        if (email) {
+            dispatch(fetchProducts(email));
+        }
+    }, [dispatch, email]);
 
     const products = useSelector(selectAllProducts);
-    console.log(products)
-    const [filterdProducts,setFilterdProducts]= useState(products);
-    
-    const [searchItem, setSearchItem] = useState('')
-    // console.log(filterdProducts)
-    // console.log(JSON.stringify(products))
+    const [searchItem, setSearchItem] = useState('');
     const [activeTab, setActiveTab] = useState('');
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     const onAddProduct = (product) => {
-        
-        // toast.success("Successfully toasted!")
-        dispatch(addToCart(product))
-    }
+        dispatch(addToCart(product));
+        toast.success("Product added to cart!");
+    };
+
     const onTabSwitch = (newActiveTab) => {
         setActiveTab(newActiveTab);
-        let categories = products.products.map((product) => product.name.name);
-        let index = categories.findIndex(category => newActiveTab === category);
-        console.log(index);
-        if (index > -1) {
-            setActiveTabIndex(index);
-        } else {
-            setActiveTabIndex(0);
-        }
-    }
+        const index = products.findIndex(product => product.name.name === newActiveTab);
+        setActiveTabIndex(index >= 0 ? index : 0);
+    };
 
-    const handleInputChange = (e) => { 
-        const searchTerm = e.target.value;
-        setSearchItem(searchTerm)
-    
-        for (const product of product.products) {
-            for (const subProduct of product.products) {
-                // Check if product name matches
-                if (subProduct.name.toLowerCase() === searchTerm.toLowerCase()) {
-                    setFilterdProducts(subProduct)
-                }
-            }
-        }
-      }
+    const handleInputChange = (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        setSearchItem(searchTerm);
+        const filteredProducts = products[activeTabIndex]?.products.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        setFilterdProducts(filteredProducts || []);
+    };
 
-    return(
+    return (
         email ?
-        
-        <div className="bg-[#fff] mt-10 h-screen">
-           {
-           products && products.status !== 'fulfilled' ?
-            <div className="loader " /> :
-            <div className="menu-wrapper ">
-                {
-                    products.products &&
-                    <Tabs
-                        list={products.products.map((product) => product.name.name)}
-                        activeTab={activeTab}
-                        onTabSwitch={onTabSwitch}
-                        handleInputChange={handleInputChange}
-                        searchItem={searchItem}
-                        
-                        />
+            <div className="bg-[#fff] mt-10 h-screen">
+                {products && products.status !== 'fulfilled' ?
+                    <div className="loader" /> :
+                    <div className="menu-wrapper">
+                        {products &&
+                            <Tabs
+                                list={products.map((product) => product.name.name)}
+                                activeTab={activeTab}
+                                onTabSwitch={onTabSwitch}
+                                handleInputChange={handleInputChange}
+                                searchItem={searchItem}
+                            />
+                        }
+                        <div className="flex flex-row mx-4 justify-center flex-wrap">
+                            {products[activeTabIndex]?.products.map((product, index) => (
+                                <ProductPreviewCard key={index} product={product} onAddProduct={onAddProduct} />
+                            ))}
+                        </div>
+                    </div>
                 }
-                <div className="flex flex-row mx-4 justify-center  flex-wrap">
-                {
-                    products.products && products.products[activeTabIndex].products.map((product, index) => {
-                        return (
-                           <ProductPreviewCard key={index} product={product} onAddProduct={onAddProduct}/>
-                        )
-                    })
-                }
-                </div>
-            </div>
-           }
-        </div>:<FallbackMenu/>
-    )
-}
+            </div> :
+            <FallbackMenu />
+    );
+};
 
-export default Menu
+export default Menu;
