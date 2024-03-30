@@ -23,7 +23,7 @@ const Menu = ()=>{
     useEffect(() => {
         dispatch(fetchProducts(email))
         console.log(userinfo.providerid)        
-    }, [])
+    }, [userinfo])
 
 
     const products = useSelector(selectAllProducts);
