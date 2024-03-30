@@ -135,17 +135,9 @@ function Login({googleRole}) {
           <p>
             Already have an account?{" "}
             <span>
-              <button
-                onClick={() => {
-                  console.log(role)
-                  role === "user"
-                    ? navigate("/user/register")
-                    : navigate("/provider/register");
-                }}
-              >
-                Sign up
-              </button>
+              <Link to={'/user/register'}>Register</Link>
             </span>
+            
           </p>
           <GoogleButton
             className="ml-20 !rounded-md"

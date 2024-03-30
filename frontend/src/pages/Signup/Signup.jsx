@@ -10,6 +10,8 @@ import styles from "./Signup.module.css";
 
 function Signup({ role }) {
   const navigate = useNavigate();
+ const [loading,setLogin]=useState(false)
+
   const dispatch = useDispatch();
   const userinfo = useSelector(user);
   const [values, setValues] = useState({
@@ -48,8 +50,10 @@ function Signup({ role }) {
 
   useEffect(() => {
     if (userinfo.role) {
+      setLogin(false)
       if (userinfo.role === "user") {
-        navigate("/");
+
+       userinfo.providerid ? navigate(`/provider/${userinfo && userinfo.providerid}`):navigate(`/`);
       } else if (userinfo.role === "provider") {
         navigate("/admin/orders");
       }
@@ -57,8 +61,10 @@ function Signup({ role }) {
   }, [userinfo]);
 
   const handleSubmission = async () => {
+    setLogin(true)
     if (!values.name || !values.email || !values.pass) {
       setErrorMsg("Fill all fields");
+      setLogin(false)
       return;
     }
     setErrorMsg("");
@@ -83,7 +89,9 @@ function Signup({ role }) {
   };
 
   return (
+    
     <div className={styles.container}>
+      {loading && <div className="loader z-10  " />}
       <div className={styles.innerBox}>
         <h1 className={styles.heading}>Signup</h1>
 
@@ -117,7 +125,7 @@ function Signup({ role }) {
           <p>
             Already have an account?{" "}
             <span>
-              <Link to={role === 'user' ? '/user/Login' : '/provider/Login'}>Log In</Link>
+              <Link to={'/Login'}>Log In</Link>
             </span>
           </p>
         </div>

@@ -11,10 +11,10 @@ import { fetchProducts } from "../store/menu/productsSlice"
 const Home = ({name}) => {
   const dispatch = useDispatch();
   const { providerId } = useParams();
-  console.log(providerId)
+  
 
   useEffect(() => {
-   
+    console.log(providerId)
     dispatch(setUserProviderId(providerId));
   }, [dispatch]);
 
