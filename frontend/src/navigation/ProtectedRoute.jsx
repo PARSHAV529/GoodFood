@@ -11,7 +11,7 @@ const ProtectedRoute = ({ name ,component: Component, userRole }) => {
     if (!userRole && !['home', 'login', 'signup'].includes(Component.name.toLowerCase())) {
       setIsLoading(false);
       navigate('/');
-    } else if (userRole === 'user' && !['home', 'login', 'signup','menu','cart','Userprofile'].includes(Component.name.toLowerCase())) {
+    } else if (userRole === 'user' && !['home', 'login', 'signup','menu','cart','userprofile'].includes(Component.name.toLowerCase())) {
       setIsLoading(false);
       navigate('/');
     } else if (userRole === 'provider' && !['ordersadmin', 'categoriesadmin', 'menuitemsadmin'].includes(Component.name.toLowerCase()) ) {
