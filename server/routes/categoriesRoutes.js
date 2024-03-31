@@ -22,7 +22,7 @@ router.get('/categories', async (req, res) => {
     console.error('Error fetching categories:', err.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+})
 
 // Other routes remain unchanged
 

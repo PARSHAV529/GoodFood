@@ -31,7 +31,7 @@ const send = async (userInfo) => {
       }
     }
 
-const addToDatabase = async (productName,quantity,ProductPrice,status,userEmail) => {
+const addToDatabase = async (productName,quantity,ProductPrice,status,userEmail,provideremail) => {
 console.log(productName)
 console.log(quantity)
 console.log(userEmail)
@@ -44,7 +44,8 @@ console.log(ProductPrice)
       quantity,
       ProductPrice,
       userEmail,
-      status
+      status,
+      provideremail
     });
     console.log('Cart item added:', response.data);
   } catch (error) {
@@ -52,12 +53,12 @@ console.log(ProductPrice)
   }
 };
 
-const addMultipleToDatabase = async (productQuantities, userEmail) => {
+const addMultipleToDatabase = async (productQuantities, userEmail,provideremail) => {
   try {
     // Create an array of promises for each item to be added to the database
     const promises = productQuantities.map(item =>{
       // console.log(item)
-      addToDatabase(item.productName, item.quantity,item.ProductPrice,item.status, userEmail)}
+      addToDatabase(item.productName, item.quantity,item.ProductPrice,item.status, userEmail,provideremail)}
     );
 
     // Execute all promises concurrently and wait for all of them to resolve
@@ -77,7 +78,7 @@ export const Payment = () => {
   let total = 0
   const cart = useSelector(cartProducts);
   const userinfo = useSelector(user);
-
+  const provideremail=userinfo.providerid
 
 
   const navigate = useNavigate();
@@ -96,7 +97,7 @@ export const Payment = () => {
     
           // window.alert("Order Placed Succefully")
           dispatch(clearCart())
-          navigate('/')
+          navigate(`/provider/${userinfo && userinfo.providerid}`)
 
           const productQuantities = cart.map(product => {
             return {
@@ -108,7 +109,7 @@ export const Payment = () => {
             };
           });
           
-          addMultipleToDatabase(productQuantities,userinfo.email)
+          addMultipleToDatabase(productQuantities,userinfo.email,provideremail)
           //  addToDatabase(productQuantities[0].productName, productQuantities[0].quantity, userinfo.email);
           send(userinfo)
           console.log(userinfo.email)

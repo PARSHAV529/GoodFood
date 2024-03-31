@@ -32,8 +32,12 @@ router.post('/add-cart-item', async (req, res) => {
 // Route to fetch all cart items
 router.get('/cart-items', async (req, res) => {
   try {
-    // Fetch all cart items from the database
-    const cartItems = await CartItem.find();
+    // Extract provider's email from query parameters
+    const provideremail = req.query.provideremail;
+
+    // Fetch cart items based on the provider's email from the database
+    const cartItems = await CartItem.find({ provideremail });
+    // console.log(cartItems)
 
     // Send the cart items as a response
     res.status(200).json(cartItems);

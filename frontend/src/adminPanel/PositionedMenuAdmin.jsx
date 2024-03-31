@@ -1,15 +1,18 @@
 import { Select, Option } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import axios from 'axios'; // Import axios for HTTP requests
+import { useSelector } from "react-redux";
+import { user } from "../store/userInfo/userSlice";
 
 export default function PositionedMenuAdmin({ onSelect,defcategory }) {
   const [value, setValue] = useState(""); // Initialize value state to an empty string
   const [category, setCategory] = useState([]);
+  const userInfo= useSelector(user)
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://goodfood-909g.onrender.com/api/categories');
+        const response = await axios.get(`https://goodfood-909g.onrender.com/api/categories?provideremail=${userInfo.email}`);
         setCategory(response.data);
         // Set default value to the first category name
         if (response.data.length > 0) {

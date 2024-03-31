@@ -11,11 +11,14 @@ import {
   Container,
 
 } from "@mui/material";
+import { useSelector } from 'react-redux';
+import { user } from '../store/userInfo/userSlice';
 
-const addToDatabase = async (newcategory) => {
+const addToDatabase = async (newcategory,email) => {
   // Create a new user instance
   let data = {
     name: newcategory,
+    provideremail:email
   }
 
   try {
@@ -56,6 +59,8 @@ const editCategoryName = async (id, newName) => {
 
 
 export const CategoriesAdmin = () => {
+  const userinfo = useSelector(user)
+  console.log(userinfo.email)
 
   const [inputVal, setInputVal] = useState("");
   const [todos, setTodos] = useState([]);
@@ -66,7 +71,7 @@ export const CategoriesAdmin = () => {
   useEffect(() => {
      const  fetchCategories = async () => {
       try {
-        const response = await axios.get('https://goodfood-909g.onrender.com/api/categories'); // Assuming your backend server is running on the same host
+        const response = await axios.get(`https://goodfood-909g.onrender.com/api/categories?provideremail=${userinfo.email}`); // Assuming your backend server is running on the same host
         setTodos(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -97,7 +102,7 @@ export const CategoriesAdmin = () => {
   const handleClick = () => {
     if (!isEdited) {
 
-      addToDatabase(inputVal);
+      addToDatabase(inputVal,userinfo.email);
       setFetch("added");
     } else {
       // addToDatabase(inputVal);

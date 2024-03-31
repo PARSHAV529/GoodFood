@@ -11,24 +11,12 @@ const ProtectedRoute = ({ name ,component: Component, userRole }) => {
     if (!userRole && !['home', 'login', 'signup'].includes(Component.name.toLowerCase())) {
       setIsLoading(false);
       navigate('/');
-    } else if (userRole === 'user' && Component.name.toLowerCase() === 'admin') {
+    } else if (userRole === 'user' && !['home', 'login', 'signup','menu','cart','Userprofile'].includes(Component.name.toLowerCase())) {
       setIsLoading(false);
       navigate('/');
-    } else if (userRole === 'provider' ) {
+    } else if (userRole === 'provider' && !['ordersadmin', 'categoriesadmin', 'menuitemsadmin'].includes(Component.name.toLowerCase()) ) {
       setIsLoading(false);
-      switch (Component.name.toLowerCase()) {
-        case 'ordersadmin':
-          navigate('/admin/orders');
-          break;
-        case 'categoriesadmin'://CategoriesAdmin
-          navigate('/admin/categories');
-          break;
-        case 'menuitemsadmin'://MenuItemsAdmin
-          navigate('/admin/menuitems');
-          break;
-        default:
-          navigate('/admin/orders');
-      }
+      navigate('/admin/orders');
     }
   }, [userRole, Component.name, navigate]);
   console.log(name)

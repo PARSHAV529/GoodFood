@@ -53,7 +53,7 @@ function Signup({ role }) {
       setLogin(false)
       if (userinfo.role === "user") {
 
-       userinfo.providerid ? navigate(`/provider/${userinfo && userinfo.providerid}`):navigate(`/`);
+      navigate(`/provider/${userinfo && userinfo.providerid}`)
       } else if (userinfo.role === "provider") {
         navigate("/admin/orders");
       }

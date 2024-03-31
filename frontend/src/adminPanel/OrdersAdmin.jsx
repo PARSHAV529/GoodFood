@@ -12,6 +12,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useSelector } from 'react-redux';
+import { user } from '../store/userInfo/userSlice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,6 +37,7 @@ export const OrdersAdmin = () => {
   const [cartItems, setCartItems] = useState([]);
   const [disabledButtons, setDisabledButtons] = useState([]);
   const [reload, setReload] = useState("");
+  const userinfo= useSelector(user)
 
   const send = async (recipientEmail) => {
 let subject= 'Your Order is Redy !!'
@@ -76,7 +79,8 @@ let subject= 'Your Order is Redy !!'
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get('https://goodfood-909g.onrender.com/api/cart-items');
+        const response = await axios.get(`https://goodfood-909g.onrender.com/api/cart-items?provideremail=${userinfo.email}`);
+        console.log(response.data);
         const sortedCartItems = response.data.sort((a, b) => {
           if (a.status === "Received" && b.status !== "Received") return 1;
           if (a.status !== "Received" && b.status === "Received") return -1;
@@ -124,7 +128,9 @@ let subject= 'Your Order is Redy !!'
               </TableRow>
             </TableHead>
             <TableBody>
+            {console.log(cartItems)}
               {cartItems.map((row) => (
+               
                 <StyledTableRow key={row._id}>
                   <StyledTableCell align='center'>
                     {row.productName}
