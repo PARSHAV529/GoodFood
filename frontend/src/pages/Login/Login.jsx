@@ -124,6 +124,7 @@ function Login({googleRole}) {
           onChange={(event) =>
             setValues((prev) => ({ ...prev, pass: event.target.value }))
           }
+          type='Password'
           placeholder="Enter Password"
         />
 

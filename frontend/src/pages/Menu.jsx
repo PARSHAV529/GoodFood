@@ -36,7 +36,7 @@ const Menu = ()=>{
 
     const onAddProduct = (product) => {
         
-        // toast.success("Successfully toasted!")
+        toast.success("Successfully toasted!")
         dispatch(addToCart(product))
     }
     const onTabSwitch = (newActiveTab) => {

@@ -18,7 +18,7 @@ export default function FixedBottomNavigation() {
   const handleNavigation = (event, newValue) => {
     switch (newValue) {
       case 'Home':
-        navigate(`/provider/${userinfo && userinfo.providerid}`);
+        userinfo && userinfo.providerid ? navigate(`/provider/${userinfo && userinfo.providerid }`) : navigate('/');
         break;
       case 'About':
         navigate('#about');

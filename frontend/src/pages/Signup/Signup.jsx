@@ -115,6 +115,7 @@ function Signup({ role }) {
           onChange={(event) =>
             setValues((prev) => ({ ...prev, pass: event.target.value }))
           }
+          type="password"
         />
 
         <div className={styles.footer}>

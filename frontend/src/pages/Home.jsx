@@ -21,29 +21,33 @@ const Home = ({name}) => {
     const fetchEmail = async () => {
       try {
         const response = await axios.get(`https://goodfood-909g.onrender.com/api/user/${providerId}`);
+console.log(response.data.email)
         setEmail(response.data.email);
       } catch (error) {
+        console.log(response.data.email)
+
         console.error('Error fetching email:', error);
+        setEmail('');
       }
     };
 
-    if (providerId) {
+    if (providerId!=='undefined') {
       fetchEmail(); // Fetch email when userId changes
     }
-  }, []);
+  }, [providerId]);
 
   useEffect(() => {
-    console.log(providerId)
+    console.log(email)
     dispatch(setUserProviderId(providerId));
   }, [dispatch,providerId]);
 
   useEffect(() => {
-    if(email){
-        dispatch(fetchProducts(email))
-        console.log(providerId)   
+    if( providerId!=='undefined'){
+        dispatch(fetchProducts(email)) 
+        console.log(email)   
     }
          
-}, [email])
+}, [email,providerId])
 
     return (<div className="bg-[#fff]">
      <div className="">
