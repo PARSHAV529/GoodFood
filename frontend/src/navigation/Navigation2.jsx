@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import DrawerAppBar from "../components/Header2.jsx";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
@@ -21,8 +21,19 @@ import { OrdersAdmin } from "../adminPanel/OrdersAdmin.jsx";
 import Example from "../components/Header3.jsx";
 import  UserProfile  from "../pages/UserProfile.jsx";
 import { NotFound } from "../pages/NotFound.jsx";
+import AdminHome from "../adminPanel/AdminHome.jsx";
 
 
+const ProviderPrivateRoute = ({ children }) => {
+    const userInfo = useSelector(user);
+    console.log(userInfo)
+    return userInfo && userInfo.role ==='provider' ? children : <Navigate to="/" />;
+  };
+const UserPrivateRoute = ({ children }) => {
+    const userInfo = useSelector(user);
+    console.log(userInfo)
+    return userInfo && userInfo.role ==='user' ? children : <Navigate to="/" />;
+  };
 
 
 
@@ -76,15 +87,65 @@ const Navigation2    = () => {
         <Route path="/user/register" element={<Signup role='user' />} />
       
         <Route path="/provider/register" element={<Signup role='provider' />} />
-        <Route path="/menu" element={ <Menu/>} />
-        <Route path="/cart" element={<Cart/>} />
-        <Route path="/userProfile" element={<UserProfile/>} />
-        <Route path="/admin/orders" element={<OrdersAdmin/>} />
-        <Route path="/admin/categories" element={<CategoriesAdmin/>} />
-        <Route path="/admin/menuitems" element={<MenuItemsAdmin/>} />
+
+        <Route
+        path="/menu"
+        element={
+          <UserPrivateRoute>
+            <Menu />
+          </UserPrivateRoute>
+        }
+      />
+        <Route
+        path="/userProfile"
+        element={
+          <UserPrivateRoute>
+            <UserProfile />
+          </UserPrivateRoute>
+        }
+      />
+        <Route
+        path="/cart"
+        element={
+          <UserPrivateRoute>
+            <Cart />
+          </UserPrivateRoute>
+        }
+      />
+
+       
+       
+        
+
+        <Route
+        path="/admin/categories"
+        element={
+          <ProviderPrivateRoute>
+            <CategoriesAdmin />
+          </ProviderPrivateRoute>
+        }
+      />
+        <Route
+        path="/admin/orders"
+        element={
+          <ProviderPrivateRoute>
+            <OrdersAdmin />
+          </ProviderPrivateRoute>
+        }
+      />
+        <Route
+        path="/admin/menuitems"
+        element={
+          <ProviderPrivateRoute>
+            <MenuItemsAdmin />
+          </ProviderPrivateRoute>
+        }
+      />
+     
+    
         <Route path="*" element={ <NotFound/>} />
 
-        {/* <Route path="/payment-success" element={<PaymentSuccess />} /> */}
+      
 
 
 
