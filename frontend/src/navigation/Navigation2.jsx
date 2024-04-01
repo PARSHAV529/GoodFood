@@ -78,8 +78,8 @@ const Navigation2    = () => {
       <Example cartCount={productsInCart ? productsInCart.length : 0} /> 
 
       <Routes>
-      <Route path="/" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
-      <Route path="/provider/:providerId" element={<ProtectedRoute component={Home} name={userinfo && userinfo.displayName} userRole={userRole} allowedRoles={['user', 'undifended']} />} />
+      <Route path="/" element={<Home name={userinfo && userinfo.displayName}/>} />
+      <Route path="/provider/:providerId" element={<Home name={userinfo && userinfo.displayName}/>} />
 
         <Route path="/logout" element={<Logout />} />
        
@@ -93,6 +93,14 @@ const Navigation2    = () => {
         element={
           <UserPrivateRoute>
             <Menu />
+          </UserPrivateRoute>
+        }
+      />
+        <Route
+        path="/provider/:providerId"
+        element={
+          <UserPrivateRoute>
+            <Home />
           </UserPrivateRoute>
         }
       />
