@@ -32,7 +32,7 @@ const Example = (props) => {
                         <a href="/" className="text-white font-semibold text-xl"><img src={logo} className='h-8 scale-150 ' alt="Logo" /></a>
                     </div>
                     <div className="flex items-center gap-3 md:gap-4 lg:gap-5">
-                        { userRole==='user' || !userRole ?<Link to="/cart" className="relative ">
+                        { userRole==='user' ?<Link to="/cart" className="relative ">
                             <div className='text-white scale-110'>            
                                 <ShoppingCartIcon />
                             </div>
