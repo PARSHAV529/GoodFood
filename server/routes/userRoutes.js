@@ -21,6 +21,24 @@ router.get('/users/:email', async (req, res) => {
       });
     });
 
+    router.get('/user/:id', async (req, res) => {
+      const userId = req.params.id;
+    
+      try {
+        // Find the user by ID
+        const user = await User.findById(userId);
+    
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+    
+        // If user found, return the email
+        res.status(200).json({ email: user.email });
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    });
 
 
   module.exports = router;
