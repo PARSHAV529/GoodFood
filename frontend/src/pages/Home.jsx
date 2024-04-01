@@ -30,12 +30,12 @@ const Home = ({name}) => {
     if (providerId) {
       fetchEmail(); // Fetch email when userId changes
     }
-  }, [providerId]);
+  }, []);
 
   useEffect(() => {
-    console.log(email)
-    dispatch(setUserProviderId(email));
-  }, [dispatch]);
+    console.log(providerId)
+    dispatch(setUserProviderId(providerId));
+  }, [dispatch,providerId]);
 
   useEffect(() => {
     if(email){
@@ -43,7 +43,7 @@ const Home = ({name}) => {
         console.log(providerId)   
     }
          
-}, [])
+}, [email])
 
     return (<div className="bg-[#fff]">
      <div className="">
