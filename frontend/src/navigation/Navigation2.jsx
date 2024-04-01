@@ -26,7 +26,7 @@ import { NotFound } from "../pages/NotFound.jsx";
 
 
 
-const Navigation = () => {
+const Navigation2    = () => {
   const dispatch = useDispatch();
 
   const productsInCart = useSelector(cartProducts);
@@ -76,12 +76,12 @@ const Navigation = () => {
         <Route path="/user/register" element={<Signup role='user' />} />
       
         <Route path="/provider/register" element={<Signup role='provider' />} />
-        <Route path="/menu" element={<ProtectedRoute component={Menu} userRole={userRole} allowedRoles={['user']} />} />
-        <Route path="/cart" element={<ProtectedRoute component={Cart} userRole={userRole} allowedRoles={['user']} />} />
-        <Route path="/userProfile" element={<ProtectedRoute component={UserProfile} userRole={userRole} allowedRoles={['user']} />} />
-        <Route path="/admin/orders" element={<ProtectedRoute component={OrdersAdmin} userRole={userRole} allowedRoles={['provider']} />} />
-        <Route path="/admin/categories" element={<ProtectedRoute component={CategoriesAdmin} userRole={userRole} allowedRoles={['provider']} />} />
-        <Route path="/admin/menuitems" element={<ProtectedRoute component={MenuItemsAdmin} userRole={userRole} allowedRoles={['provider']} />} />
+        <Route path="/menu" element={ <Menu/>} />
+        <Route path="/cart" element={<Cart/>} />
+        <Route path="/userProfile" element={<UserProfile/>} />
+        <Route path="/admin/orders" element={<OrdersAdmin/>} />
+        <Route path="/admin/categories" element={<CategoriesAdmin/>} />
+        <Route path="/admin/menuitems" element={<MenuItemsAdmin/>} />
         <Route path="*" element={ <NotFound/>} />
 
         {/* <Route path="/payment-success" element={<PaymentSuccess />} /> */}
@@ -103,4 +103,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation;
+export default Navigation2;
