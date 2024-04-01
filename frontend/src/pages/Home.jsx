@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { fetchProducts } from "../store/menu/productsSlice"
+import axios from "axios"
 
 const Home = ({name}) => {
   const dispatch = useDispatch();
