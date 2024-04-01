@@ -53,7 +53,7 @@ function Signup({ role }) {
       setLogin(false)
       if (userinfo.role === "user") {
 
-      navigate(`/provider/${userinfo && userinfo.providerid}`)
+        userinfo && userinfo.providerid ?navigate(`/provider/${userinfo && userinfo.providerid}`):navigate('/')
       } else if (userinfo.role === "provider") {
         navigate("/admin/orders");
       }
@@ -91,7 +91,7 @@ function Signup({ role }) {
   return (
     
     <div className={styles.container}>
-      {loading && <div className="loader z-10  " />}
+      {loading ? <div className="loader z-10  " />:
       <div className={styles.innerBox}>
         <h1 className={styles.heading}>Signup</h1>
 
@@ -130,7 +130,7 @@ function Signup({ role }) {
             </span>
           </p>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

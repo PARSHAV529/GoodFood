@@ -39,7 +39,7 @@ const UserPrivateRoute = ({ children }) => {
 
 const Navigation2    = () => {
   const dispatch = useDispatch();
-
+  const [loading , setLoading] = useState(true)
   const productsInCart = useSelector(cartProducts);
   // console.log(productsInCart.length)
 
@@ -52,17 +52,20 @@ const Navigation2    = () => {
   const [userinfo, setUserinfo] = useState(null);
 
   useEffect(() => {
+    // setLoading(true);
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserinfo(user);
         console.log(user.email);
         let email = user.email
         dispatch(fetchUserData({ email }));
-
+          setLoading(false)
 
       } else {
         setUserinfo("");
         dispatch(clearUser())
+        setLoading(false)
+
       }
     });
   }, [dispatch]);
@@ -74,6 +77,8 @@ const Navigation2    = () => {
 
 
   return (
+    <>
+    {loading? <div className="loader " /> :
     <BrowserRouter >
       <Example cartCount={productsInCart ? productsInCart.length : 0} /> 
 
@@ -168,7 +173,8 @@ const Navigation2    = () => {
 
 
 
-    </BrowserRouter>
+    </BrowserRouter>}
+    </>
   )
 }
 

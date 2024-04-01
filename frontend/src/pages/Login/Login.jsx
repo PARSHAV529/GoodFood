@@ -86,7 +86,7 @@ function Login({googleRole}) {
   };
 
   const handleSubmission = () => {
-    setIsLoading(false);
+    setIsLoading(true);
 
     if (!values.email || !values.pass) {
       setErrorMsg("Fill all fields");
