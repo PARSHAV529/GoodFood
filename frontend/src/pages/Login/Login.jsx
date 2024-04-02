@@ -59,7 +59,8 @@ function Login({googleRole}) {
      
     if (role === "user") {
       
-      navigate("/");
+      fetchuser && fetchuser.providerid ? navigate(`/provider/${fetchuser && fetchuser.providerid }`) : navigate('/');
+
     } else if (role === "provider") {
       
       navigate("/admin/orders");
@@ -72,6 +73,7 @@ function Login({googleRole}) {
     signInWithPopup(auth, provider).then( async (data) => {
       let email = data.user.email;
       console.log(data)
+      fetchuser && fetchuser.providerid ? navigate(`/provider/${fetchuser && fetchuser.providerid }`) : navigate('/');
 
       dispatch(fetchUserData({ email }));
       if(!role){

@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useNavigate, useNavigation } from "react-router-dom";
 import DrawerAppBar from "../components/Header2.jsx";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
@@ -24,22 +24,14 @@ import { NotFound } from "../pages/NotFound.jsx";
 import AdminHome from "../adminPanel/AdminHome.jsx";
 
 
-const ProviderPrivateRoute = ({ children }) => {
-    const userInfo = useSelector(user);
-    console.log(userInfo)
-    return userInfo && userInfo.role ==='provider' ? children : <Navigate to="/" />;
-  };
-const UserPrivateRoute = ({ children }) => {
-    const userInfo = useSelector(user);
-    console.log(userInfo)
-    return userInfo && userInfo.role ==='user' ? children : <Navigate to="/" />;
-  };
+
 
 
 
 const Navigation2    = () => {
   const dispatch = useDispatch();
   const [loading , setLoading] = useState(true)
+  
   const productsInCart = useSelector(cartProducts);
   // console.log(productsInCart.length)
 
@@ -50,6 +42,19 @@ const Navigation2    = () => {
 
 
   const [userinfo, setUserinfo] = useState(null);
+
+  const ProviderPrivateRoute = ({ children }) => {
+    const userInfo = useSelector(user);
+    console.log(userInfo)
+    return userInfo && userInfo.role ==='provider' ? children : role && role.providerid ? <Navigate to={`/provider/${role && role.providerid }`} /> : <Navigate to="/" />;
+    ;
+  };
+const UserPrivateRoute = ({ children }) => {
+    const userInfo = useSelector(user);
+    console.log(userInfo)
+    return userInfo && userInfo.role ==='user' ? children : role && role.providerid ?  <Navigate to={`/provider/${role && role.providerid }`} /> : <Navigate to="/" />;
+    ;
+  };
 
   useEffect(() => {
     // setLoading(true);
