@@ -4,13 +4,14 @@ import { ProductsPreview } from "../components/Proudect_preview"
 import HomeCrousel from "../components/HomeCrousel"
 import { setUserProviderId } from "../store/userInfo/userSlice"
 import { useDispatch } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { fetchProducts } from "../store/menu/productsSlice"
 import axios from "axios"
 
 const Home = ({name}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { providerId } = useParams();
   const [email, setEmail] = useState('');
 
@@ -24,10 +25,9 @@ const Home = ({name}) => {
 console.log(response.data.email)
         setEmail(response.data.email);
       } catch (error) {
-        console.log(response.data.email)
-
+        navigate("/")
         console.error('Error fetching email:', error);
-        setEmail('');
+        
       }
     };
 
@@ -42,7 +42,8 @@ console.log(response.data.email)
   }, [dispatch,providerId]);
 
   useEffect(() => {
-    if( providerId!=='undefined'){
+    if( providerId!=='undefined' && email){
+
         dispatch(fetchProducts(email)) 
         console.log(email)   
     }
