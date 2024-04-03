@@ -2,7 +2,7 @@ import { About } from "../components/About"
 import { Banner } from "../components/Banner"
 import { ProductsPreview } from "../components/Proudect_preview"
 import HomeCrousel from "../components/HomeCrousel"
-import { setUserProviderId } from "../store/userInfo/userSlice"
+import { setUserProviderEmail, setUserProviderId } from "../store/userInfo/userSlice"
 import { useDispatch } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -24,6 +24,7 @@ const Home = ({name}) => {
         const response = await axios.get(`https://goodfood-909g.onrender.com/api/user/${providerId}`);
 console.log(response.data.email)
         setEmail(response.data.email);
+        dispatch(setUserProviderEmail(response.data.email))
       } catch (error) {
         navigate("/")
         console.error('Error fetching email:', error);
@@ -39,7 +40,9 @@ console.log(response.data.email)
   useEffect(() => {
     console.log(email)
     dispatch(setUserProviderId(providerId));
-  }, [dispatch,providerId]);
+    dispatch(setUserProviderEmail(email))
+
+  }, [dispatch,providerId,email]);
 
   useEffect(() => {
     if( providerId!=='undefined' && email){

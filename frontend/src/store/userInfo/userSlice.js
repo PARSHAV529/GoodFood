@@ -21,6 +21,7 @@ const initialState = {
   email: '',
   role: '',
   providerid:'',
+  provideremail:'',
   status: 'idle',
   error: null,
 };
@@ -31,6 +32,9 @@ const userSlice = createSlice({
   reducers: {
     setUserProviderId: (state, action) => {
       state.providerid = action.payload;
+    },
+    setUserProviderEmail: (state, action) => {
+      state.provideremail = action.payload;
     },
     clearUser: (state) => {
       state.email = '';
@@ -68,6 +72,6 @@ export const loginUser = (email) => async (dispatch) => {
     // Handle error or dispatch error action
   }
 };
-export const { clearUser,setUserProviderId } = userSlice.actions;
+export const { clearUser,setUserProviderId,setUserProviderEmail } = userSlice.actions;
 export const user = state => state.user
 

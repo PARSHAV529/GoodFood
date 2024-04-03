@@ -78,7 +78,7 @@ export const Payment = () => {
   let total = 0
   const cart = useSelector(cartProducts);
   const userinfo = useSelector(user);
-  const provideremail=userinfo.providerid
+  const provideremail=userinfo.provideremail
 
 
   const navigate = useNavigate();

@@ -17,12 +17,17 @@ export const MenuItemsAdmin = () => {
   const openupdateForm = useRef();
   const [form, setForm] = useState("");
   const [deletetrigger, setdeletetrigger] = useState("");
+  const [isLoading,setIsLoading] = useState(true);
 
   function handleForm() {
     openForm.current.open();
+    setIsLoading(false)
+
   }
   function handleUpdateForm(product) {
     openupdateForm.current.open(product);
+    setIsLoading(false)
+
   }
 
   const products = useSelector(selectAllProducts);
@@ -31,6 +36,7 @@ export const MenuItemsAdmin = () => {
     dispatch(fetchProducts(userinfo.email));
     setForm("finished");
     setdeletetrigger("finished");
+    setIsLoading(false)
   }, [form, dispatch, deletetrigger]);
 
   // Function to sort products by price from lowest to highest
@@ -46,8 +52,8 @@ export const MenuItemsAdmin = () => {
 
   return (
     <>
-      <AdminHome tab='MenuItems' />
-
+      <AdminHome tab='MenuItems' />{
+        isLoading ?  <div className="loader " />:<>
       <div className=''>
         <AddItem ref={openForm} onclick={setForm} email={email} />
       </div>
@@ -63,7 +69,7 @@ export const MenuItemsAdmin = () => {
             handleUpdateForm(product)
           } } onDelete={setdeletetrigger} />
         ))}
-      </div>
+      </div></>}
     </>
   );
 };

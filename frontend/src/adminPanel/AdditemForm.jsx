@@ -10,23 +10,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { user } from "../store/userInfo/userSlice";
 
-const addToDatabase = async (formdata) => {
 
-
-  try {
-
-   
-    // console.log(formdata.name);
-    const res= await axios.post('https://goodfood-909g.onrender.com/api/add-menuItems',formdata)
-        // console.log(res.data)
-
-  } catch (error) {
-    console.error(error)
-  }
-
-
-
-};
 
 const AddItem = forwardRef(function AddItem({ onclick,email }, ref) {
   
@@ -38,6 +22,28 @@ const AddItem = forwardRef(function AddItem({ onclick,email }, ref) {
   let imgref = useRef();
   let [image,setImage]=useState("");
   const [selectedMenu, setSelectedMenu] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  const addToDatabase = async (formdata) => {
+
+
+    try {
+  
+     
+      // console.log(formdata.name);
+      const res= await axios.post('https://goodfood-909g.onrender.com/api/add-menuItems',formdata)
+          // console.log(res.data)
+          setIsLoading(true)
+
+    } catch (error) {
+      console.error(error)
+      setIsLoading(false)
+
+    }
+  
+  
+  
+  };
 
   useImperativeHandle(ref, () => {
     return {
@@ -87,6 +93,7 @@ const AddItem = forwardRef(function AddItem({ onclick,email }, ref) {
   };
 
   return (
+    isLoading?  <div className="loader " />:
     <dialog ref={dialog} className="rounded-md ">
       <Container component="main" maxWidth="xs">
         <Box

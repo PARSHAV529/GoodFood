@@ -38,9 +38,10 @@ export const OrdersAdmin = () => {
   const [disabledButtons, setDisabledButtons] = useState([]);
   const [reload, setReload] = useState("");
   const userinfo= useSelector(user)
+  const [isLoading,setIsLoading] = useState(true)
 
   const send = async (recipientEmail) => {
-let subject= 'Your Order is Redy !!'
+    let subject= 'Your Order is Redy !!'
     let text=`Dear ${recipientEmail.userEmail}, \n\nWe're excited to inform you that your order is now ready for pickup! Please head over to our store counter to collect your items at your earliest convenience.
     
     \n \n Order Details: \n Product Name: ${recipientEmail.productName}  \n Quantity: ${recipientEmail.quantity} \n\nIf you have any questions or concerns about your order, please don't hesitate to contact us. We're here to help!
@@ -68,7 +69,8 @@ let subject= 'Your Order is Redy !!'
   
       const response = await axios.put(`https://goodfood-909g.onrender.com/api/update-cart-item/${item._id}`, formData);
       console.log('Cart item updated:', response.data);
-  
+      setIsLoading(false)
+
       setReload("done");
     } catch (error) {
       console.error('Error updating cart item:', error);
@@ -93,9 +95,11 @@ let subject= 'Your Order is Redy !!'
           .filter(item => item.status === "Received")
           .map(item => item._id);
         setDisabledButtons(disabledButtonsIds);
-        
+        setIsLoading(false)
         setReload(""); // Reset reload flag
       } catch (error) {
+        setIsLoading(false)
+
         console.error('Error fetching cart items:', error);
       }
     };
@@ -106,71 +110,79 @@ let subject= 'Your Order is Redy !!'
     return () => clearInterval(intervalId); // Clean up interval
   }, [reload]); // Reload whenever 'reload' changes
   
-  
-  
-  
+  const handleEmailButtonClick = async (row) => {
+    await send(row);
+    updateCart(row, "Email Sent");
+    const updatedDisabledButtons = disabledButtons.filter(id => id !== row._id);
+    setDisabledButtons(updatedDisabledButtons);
+    
+
+  }
 
   return (
     <>
-      <AdminHome tab="Orders" />
-{cartItems ? 
-      <div className=' mx-20 '>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead className=' !bg-[#AA2B1D]'>
-              <TableRow>
-                <StyledTableCell align="center">Food Item Name</StyledTableCell>
-                <StyledTableCell align="center">Quantity</StyledTableCell>
-                <StyledTableCell align="center">UserEmail</StyledTableCell>
-                <StyledTableCell align="center">Status</StyledTableCell>
-                <StyledTableCell align="center">Done</StyledTableCell>
-                <StyledTableCell align="center">Email</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            {console.log(cartItems)}
-              {cartItems.map((row) => (
-               
-                <StyledTableRow key={row._id}>
-                  <StyledTableCell align='center'>
-                    {row.productName}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">{row.quantity}</StyledTableCell>
-                  <StyledTableCell align="center">{row.userEmail}</StyledTableCell>
-                  <StyledTableCell align="center">{row.status}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    <button
-                      disabled={disabledButtons.includes(row._id)}
-                      onClick={() => {
-                        updateCart(row, "Received");
-                      }}
-                      className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ${
-                        disabledButtons.includes(row._id) ? "opacity-50 cursor-not-allowed" : ""
-                      }`}
-                    >
-                      Done
-                    </button>
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                  <button
-  onClick={() => {
-    updateCart(row, "Email Sent");
-    send(row);
-  }}
-  disabled={disabledButtons.includes(row._id)}
-  className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-    disabledButtons.includes(row._id) ? "opacity-50 cursor-not-allowed" : ""
-  }`}
->
-  Email
-</button>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div> : <div> <img src={gif} alt="" srcset="" /></div>
-}    </>
+      <AdminHome tab="Orders" />{
+        isLoading ? <div className="loader " /> :
+      cartItems ? 
+        <div className=' mx-20 '>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead className=' !bg-[#AA2B1D]'>
+                <TableRow>
+                  <StyledTableCell align="center">Food Item Name</StyledTableCell>
+                  <StyledTableCell align="center">Quantity</StyledTableCell>
+                  <StyledTableCell align="center">UserEmail</StyledTableCell>
+                  <StyledTableCell align="center">Status</StyledTableCell>
+                  <StyledTableCell align="center">Done</StyledTableCell>
+                  <StyledTableCell align="center">Email</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {console.log(cartItems)}
+                {cartItems.map((row) => (
+                  <StyledTableRow key={row._id}>
+                    <StyledTableCell align='center'>
+                      {row.productName}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">{row.quantity}</StyledTableCell>
+                    <StyledTableCell align="center">{row.userEmail}</StyledTableCell>
+                    <StyledTableCell align="center">{row.status}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      <button
+                        disabled={disabledButtons.includes(row._id)}
+                        onClick={() => {
+                          setIsLoading(true)
+
+                          updateCart(row, "Received");
+                        }}
+                        className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ${
+                          disabledButtons.includes(row._id) ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
+                      >
+                        Done
+                      </button>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <button
+                        onClick={() => {
+                          setIsLoading(true)
+
+                          handleEmailButtonClick(row)}}
+                        disabled={disabledButtons.includes(row._id)}
+                        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                          disabledButtons.includes(row._id) ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
+                      >
+                        Email
+                      </button>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div> : <div> <img src={gif} alt="" srcset="" /></div>
+      }    
+    </>
   );
 }

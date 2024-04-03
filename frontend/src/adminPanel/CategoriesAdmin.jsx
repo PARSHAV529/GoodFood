@@ -27,6 +27,7 @@ const addToDatabase = async (newcategory,email) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
+      
 
     })
 
@@ -37,7 +38,6 @@ const addToDatabase = async (newcategory,email) => {
 
 
 };
-
 const deleteCategory = async (name) => {
   try {
     await axios.delete(`https://goodfood-909g.onrender.com/api/delete-categories/${name}`);
@@ -46,6 +46,8 @@ const deleteCategory = async (name) => {
     console.error('Error deleting category:', error);
   }
 };
+
+
 
 const editCategoryName = async (id, newName) => {
   try {
@@ -67,12 +69,16 @@ export const CategoriesAdmin = () => {
   const [isEdited, setIsEdited] = useState(false);
   const [editedId, setEditedId] = useState(null);
   const [fetch, setFetch] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
+
+ 
 
   useEffect(() => {
      const  fetchCategories = async () => {
       try {
         const response = await axios.get(`https://goodfood-909g.onrender.com/api/categories?provideremail=${userinfo.email}`); // Assuming your backend server is running on the same host
         setTodos(response.data);
+        setIsLoading(false)
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -84,6 +90,7 @@ export const CategoriesAdmin = () => {
 
   useEffect(() => {
     setFetch("")
+    // setIsLoading(false)
   
   }, [todos])
 
@@ -101,6 +108,7 @@ export const CategoriesAdmin = () => {
 
   const handleClick = () => {
     if (!isEdited) {
+      // setIsLoading(true)
 
       addToDatabase(inputVal,userinfo.email);
       setFetch("added");
@@ -121,6 +129,7 @@ export const CategoriesAdmin = () => {
     // setTodos(newTodos);
     deleteCategory(name)
     setFetch("deleted")
+    // setIsLoading(true)
 
 
   };
@@ -150,13 +159,14 @@ export const CategoriesAdmin = () => {
     console.log(id);
     editCategoryName(editedId,inputVal);
     // setTodos(newTodos);
+    // setIsLoading(true)
     
   };
   return (
     <>
-      <AdminHome tab='categories' />
-      {/* <div>catrgorysAdmin</div> */}
-
+      <AdminHome tab='categories' />{
+     
+isLoading ?  <div className="loader " />:
       <Container component="main" className='text-center w-[70%] '>
         <TextField
           variant="outlined"
@@ -215,7 +225,7 @@ export const CategoriesAdmin = () => {
           })}
         </List>
       </Container>
-
+}
     </>
   )
 }

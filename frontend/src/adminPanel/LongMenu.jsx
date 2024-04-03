@@ -23,7 +23,7 @@ export default function LongMenu({name,onDelete,updateForm,product}) {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/delete-menuItem/${name}`);
+      const response = await axios.delete(`https://goodfood-909g.onrender.com/api/delete-menuItem/${name}`);
       if (response.status === 200) {
         // Handle success
         onDelete("deleted")

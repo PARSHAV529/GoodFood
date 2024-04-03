@@ -92,6 +92,8 @@ function Login({googleRole}) {
 
     if (!values.email || !values.pass) {
       setErrorMsg("Fill all fields");
+      setIsLoading(false);
+
       return;
     }
     setErrorMsg("");
@@ -102,7 +104,9 @@ function Login({googleRole}) {
         // Dispatch action to fetch user data
         dispatch(fetchUserData({ email }));
       })
-      .catch((err) => {
+      .catch((err) => {   
+         setIsLoading(false);
+
         setSubmitButtonDisabled(false);
         setErrorMsg(err.message);
       });
