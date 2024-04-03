@@ -55,9 +55,15 @@ const UserPrivateRoute = ({ children }) => {
     return userInfo && userInfo.role ==='user' ? children : role && role.providerid ?  <Navigate to={`/provider/${role && role.providerid }`} /> : <Navigate to="/" />;
     ;
   };
+const PrivateRoute = ({ children }) => {
+    const userInfo = useSelector(user);
+    console.log(userInfo)
+    return userInfo && (userInfo.role ==='user' || !userInfo.role) ? children : role && role.providerid ?  <Navigate to={`/provider/${role && role.providerid }`} /> : <Navigate to="/" />;
+    ;
+  };
 
   useEffect(() => {
-    // setLoading(true);
+    setLoading(true);
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserinfo(user);
@@ -89,7 +95,6 @@ const UserPrivateRoute = ({ children }) => {
 
       <Routes>
       <Route path="/" element={<Home name={userinfo && userinfo.displayName}/>} />
-      <Route path="/provider/:providerId" element={<Home name={userinfo && userinfo.displayName}/>} />
 
         <Route path="/logout" element={<Logout />} />
        
@@ -98,6 +103,14 @@ const UserPrivateRoute = ({ children }) => {
       
         <Route path="/provider/register" element={<Signup role='provider' />} />
 
+        <Route
+        path="/provider/:providerId"
+        element={
+          <PrivateRoute>
+           <Home name={userinfo && userinfo.displayName}/>
+          </PrivateRoute>
+        }
+      />
         <Route
         path="/menu"
         element={

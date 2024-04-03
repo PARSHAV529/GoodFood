@@ -38,7 +38,7 @@ export const OrdersAdmin = () => {
   const [disabledButtons, setDisabledButtons] = useState([]);
   const [reload, setReload] = useState("");
   const userinfo= useSelector(user)
-  const [isLoading,setIsLoading] = useState(true)
+  const [isLoading,setIsLoading] = useState(false)
 
   const send = async (recipientEmail) => {
     let subject= 'Your Order is Redy !!'
@@ -79,6 +79,8 @@ export const OrdersAdmin = () => {
   
   
   useEffect(() => {
+    setIsLoading(true)
+
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(`https://goodfood-909g.onrender.com/api/cart-items?provideremail=${userinfo.email}`);
@@ -89,6 +91,8 @@ export const OrdersAdmin = () => {
           return 0;
         });
         setCartItems(sortedCartItems);
+        setIsLoading(false)
+
   
         // Disable email button for items with "Received" status
         const disabledButtonsIds = sortedCartItems
