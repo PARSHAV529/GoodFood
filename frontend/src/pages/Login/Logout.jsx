@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import  {clearUser, user}  from '../../store/userInfo/userSlice';
 import { useNavigate } from "react-router-dom";
 import { clearCart } from '../../store/cart/cartSlice';
+import { useState } from 'react';
 export const Logout = () => {
     const dispatch = useDispatch();
     const userinfo = useSelector(user)
+    
     const navigate = useNavigate();
   
  
