@@ -35,7 +35,9 @@ const Home = ({name}) => {
     };
 
     if (providerId!==undefined) {
-      fetchEmail(); // Fetch email when userId changes
+      fetchEmail(); 
+      dispatch(setUserProviderEmail(''))
+      // Fetch email when userId changes
     }
   }, [dispatch,providerId]);
 
