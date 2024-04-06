@@ -14,6 +14,7 @@ const Home = ({name}) => {
   const navigate = useNavigate();
   const { providerId } = useParams();
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
 
   
@@ -22,9 +23,11 @@ const Home = ({name}) => {
     const fetchEmail = async () => {
       try {
    
+
        const response =  await axios.get(`https://goodfood-909g.onrender.com/api/user/${providerId}`) 
         setEmail(response.data.email);
         dispatch(setUserProviderEmail(response.data.email))
+        setIsLoading(false)
 
 
       } catch (error) {
@@ -36,17 +39,19 @@ const Home = ({name}) => {
 
     if (providerId!==undefined) {
       fetchEmail(); 
-      dispatch(setUserProviderEmail(''))
-      // Fetch email when userId changes
+      
+    }else{
+      dispatch(setUserProviderEmail(""));
     }
   }, [dispatch,providerId]);
 
   useEffect(() => {
-    console.log(email)
 
     dispatch(setUserProviderId(providerId));
 
   },[dispatch,providerId]);
+
+  
  
 
   useEffect(() => {
@@ -58,7 +63,10 @@ const Home = ({name}) => {
          
 }, [email,providerId])
 
-    return (<div className="bg-[#fff]">
+    return (
+      isLoading? <div className='loader'/>:
+    
+    <div className="bg-[#fff]">
      <div className="">
       <div className="absolute  top-0 left-0 w-full h-full flex justify-center items-center">
         <Banner name={name}  />
