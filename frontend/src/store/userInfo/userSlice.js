@@ -39,7 +39,6 @@ const userSlice = createSlice({
     clearUser: (state) => {
       state.email = '';
       state.role = '';
-     
       state.status = 'idle';
       state.error = null;
     },

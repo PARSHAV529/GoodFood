@@ -21,10 +21,12 @@ const Home = ({name}) => {
     // Function to fetch email based on user ID
     const fetchEmail = async () => {
       try {
-        const response = await axios.get(`https://goodfood-909g.onrender.com/api/user/${providerId}`);
-console.log(response.data.email)
+   
+       const response =  await axios.get(`https://goodfood-909g.onrender.com/api/user/${providerId}`) 
         setEmail(response.data.email);
         dispatch(setUserProviderEmail(response.data.email))
+
+
       } catch (error) {
         navigate("/")
         console.error('Error fetching email:', error);
@@ -32,17 +34,18 @@ console.log(response.data.email)
       }
     };
 
-    if (providerId!=='undefined') {
+    if (providerId!==undefined) {
       fetchEmail(); // Fetch email when userId changes
     }
-  }, [providerId]);
+  }, [dispatch,providerId]);
 
   useEffect(() => {
     console.log(email)
-    dispatch(setUserProviderId(providerId));
-    dispatch(setUserProviderEmail(email))
 
-  }, [dispatch,providerId,email]);
+    dispatch(setUserProviderId(providerId));
+
+  },[dispatch,providerId]);
+ 
 
   useEffect(() => {
     if( providerId!=='undefined' && email){
@@ -61,7 +64,8 @@ console.log(response.data.email)
       <HomeCrousel />
     </div>
 {/* <ProductsPreview/> */}
-        <About /></div>)
+        {/* <About /> */}
+        </div>)
 }
 
 export default Home
