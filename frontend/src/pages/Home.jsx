@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { fetchProducts } from "../store/menu/productsSlice"
 import axios from "axios"
+import { clearCart } from "../store/cart/cartSlice"
 
 const Home = ({name}) => {
   const dispatch = useDispatch();
@@ -15,9 +16,7 @@ const Home = ({name}) => {
   const { providerId } = useParams();
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
-
-  
+ 
  useEffect(() => {
     // Function to fetch email based on user ID
     const fetchEmail = async () => {
@@ -27,11 +26,14 @@ const Home = ({name}) => {
        const response =  await axios.get(`https://goodfood-909g.onrender.com/api/user/${providerId}`) 
         setEmail(response.data.email);
         dispatch(setUserProviderEmail(response.data.email))
+
         setIsLoading(false)
 
 
       } catch (error) {
         navigate("/")
+        setIsLoading(false)
+
         console.error('Error fetching email:', error);
         
       }
@@ -60,6 +62,9 @@ const Home = ({name}) => {
         dispatch(fetchProducts(email)) 
         console.log(email)   
     }
+
+    setIsLoading(false)
+
          
 }, [email,providerId])
 
