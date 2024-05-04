@@ -44,6 +44,8 @@ const Home = ({name}) => {
       
     }else{
       dispatch(setUserProviderEmail(""));
+      setIsLoading(false)
+
     }
   }, [dispatch,providerId]);
 
@@ -60,12 +62,12 @@ const Home = ({name}) => {
     if( providerId!=='undefined' && email){
 
         dispatch(fetchProducts(email)) 
+
         console.log(email)   
     }
 
-    setIsLoading(false)
 
-         
+
 }, [email,providerId])
 
     return (

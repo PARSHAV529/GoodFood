@@ -35,14 +35,16 @@ const Menu = ()=>{
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     const onAddProduct = (product) => {
-        
-        toast.success("Successfully toasted!")
+
         dispatch(addToCart(product))
-    }
+        }
     const onTabSwitch = (newActiveTab) => {
         setActiveTab(newActiveTab);
         let categories = products.products.map((product) => product.name.name);
+        categories.sort();
+        
         let index = categories.findIndex(category => newActiveTab === category);
+        
         console.log(index);
         if (index > -1) {
             setActiveTabIndex(index);
