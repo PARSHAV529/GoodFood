@@ -29,7 +29,7 @@ const Example = (props) => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between md:flex-wrap items-center py-4">
                     <div className="flex-shrink-0">
-                        <a href="/" className="text-white font-semibold text-xl"><img src={logo} className='h-8 scale-150 ' alt="Logo" /></a>
+                        <a className="text-white font-semibold text-xl"><img src={logo} className='h-8 scale-150 ' alt="Logo" /></a>
                     </div>
                     <div className="flex items-center gap-3 md:gap-4 lg:gap-5">
                         { userRole==='user' ?<Link to="/cart" className="relative ">

@@ -8,6 +8,7 @@ import { ProductPreviewCard } from "../components/ProductPreviewCard";
 import toast from "react-hot-toast";
 import { user } from "../store/userInfo/userSlice";
 import { FallbackMenu } from "../components/FallbackMenu";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -25,7 +26,7 @@ const Menu = ()=>{
 
     const products = useSelector(selectAllProducts);
  
-    console.log(products)
+    const navigate = useNavigate()
     const [filterdProducts,setFilterdProducts]= useState(products);
     
     const [searchItem, setSearchItem] = useState('')
@@ -37,6 +38,8 @@ const Menu = ()=>{
     const onAddProduct = (product) => {
 
         dispatch(addToCart(product))
+        
+        navigate('/cart')
         }
     const onTabSwitch = (newActiveTab) => {
         setActiveTab(newActiveTab);
@@ -51,6 +54,7 @@ const Menu = ()=>{
         } else {
             setActiveTabIndex(0);
         }
+        
     }
 
     const handleInputChange = (e) => { 
